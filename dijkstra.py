@@ -13,25 +13,31 @@ class Arc():
     self.Dest = dest
     self.Cost = cost
 
-def dijkstraSolver(root):
+def dijkstraSolver(root,nodes):
 
   root.Distance = 0
   node = root
   
   while True:
   
+    node.Visited = True
+  
     arcsToNotVisited = [
       arc for arc in node.Arcs if not arc.Dest.Visited]
     
     if not arcsToNotVisited:
-      break
-    
-    for arc in arcsToNotVisited:
-      d = node.Distance + arc.Cost
-      if d < arc.Dest.Distance:
-        arc.Dest.Distance = d
+      notVisited = [node for node in nodes if not node.Visited]
+      if not notVisited:
+        break
+      else:
+        idx = argmin([node.Distance for node in notVisited])
+        node = notVisited[idx]
+        continue
 
-    node.Visited = True
-  
-    idx = argmin([arc.Dest.Distance for arc in arcsToNotVisited])
-    node = arcsToNotVisited[idx].Dest
+    else:
+      for arc in arcsToNotVisited:
+        d = node.Distance + arc.Cost
+        if d < arc.Dest.Distance:
+          arc.Dest.Distance = d
+      idx = argmin([arc.Dest.Distance for arc in arcsToNotVisited])
+      node = arcsToNotVisited[idx].Dest

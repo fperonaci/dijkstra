@@ -34,7 +34,9 @@ def testWikipediaGraph():
   n6.Arcs.append(Arc(n6,n3,2))
   n6.Arcs.append(Arc(n6,n5,9))
 
-  dijkstraSolver(root=n1)
+  nodes = [n1,n2,n3,n4,n5,n6]
+
+  dijkstraSolver(root=n1,nodes=nodes)
 
   assert n1.Distance == 0
   assert n2.Distance == 7
