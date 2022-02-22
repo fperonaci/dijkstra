@@ -41,3 +41,13 @@ def dijkstraSolver(root,nodes):
         continue
       else:
         break
+
+def buildUndirectedGraph(labels,arcs):
+  nodes = {label:Node(label) for label in labels}
+  for arc in arcs:
+    orig = nodes[arc[0]]
+    dest = nodes[arc[1]]
+    cost = arc[2]
+    orig.Arcs.append(Arc(orig,dest,cost))
+    dest.Arcs.append(Arc(dest,orig,cost))
+  return list(nodes.values())
